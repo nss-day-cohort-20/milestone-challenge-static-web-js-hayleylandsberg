@@ -37,33 +37,22 @@ var output = document.getElementById("showTree");
 button.addEventListener("click", growTree);
 
 
-// //Functions to get height and character
-// function getHeight() {
-// 	var height = heightInput.value;
-// 		return height;
-// };
-
-// function getCharacter() {	
-// 	var character = characterInput.value;
-// 		return character;
-// };
-
-
 //Function to grow tree
-function growTree(event){
-	console.log("hello");
-	console.log(characterInput.value);
-	console.log(heightInput.value);
-	if (characterInput.value !== "" && heightInput.value !== ""){
-		for(i = 0; i < heightInput.value; i++) {
+function growTree(characters){
+	var space = " ";
+	var spaces = space.repeat(heightInput.value - 1);
+	var charNum = characterInput.value;
 
-//TODO: Figure out how to run a loop to different lines in the console... /n?
+	if (characterInput.value !== "" && heightInput.value !== ""){
+		for(var i = 0; i < heightInput.value; i++) {
+			console.log(spaces + charNum);
+			spaces = space.repeat(heightInput.value - (i+2));
+			charNum = charNum + characterInput.value.repeat(2);
 		}
 	} else {
-		alert("Please enter values for both character and height fields.");
+		alert("Please enter a value for both the character and height fields.");
 	}
 };
-
 
 //Enter key to work when curser is in character field.
 
@@ -75,3 +64,5 @@ character.addEventListener("keypress", function(event) {
 		growTree();
 	}
 });
+
+
