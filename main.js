@@ -34,20 +34,23 @@ var output = document.getElementById("showTree");
 
 
 //Add event listener to button
-button.addEventListener("click", growTree);
+button.addEventListener("click", buildingObj);
 
-
+var burnDownTree = {};
 //Function to grow tree
-function growTree(characters){
+function growTree(burnBabyBurn){
 	var space = " ";
-	var spaces = space.repeat(heightInput.value - 1);
-	var charNum = characterInput.value;
+	// var spaces = space.repeat(heightInput.value - 1);
+	var spaces = 0;
+	var charNum = burnBabyBurn.character;
 
-	if (characterInput.value !== "" && heightInput.value !== ""){
-		for(var i = 0; i < heightInput.value; i++) {
+	if (burnBabyBurn.character !== "" && burnBabyBurn.height !== ""){
+		for(var i = 0; i < burnBabyBurn.height; i++) {
+			spaces = space.repeat((burnBabyBurn.height - (i+1)));
+			charNum = burnBabyBurn.character.repeat((2*i)+1);
 			console.log(spaces + charNum);
-			spaces = space.repeat(heightInput.value - (i+2));
-			charNum = charNum + characterInput.value.repeat(2);
+			// console.log(heightInput.value - (i+2));
+			// console.log(characterInput.value);
 		}
 	} else {
 		alert("Please enter a value for both the character and height fields.");
@@ -56,13 +59,29 @@ function growTree(characters){
 
 //Enter key to work when curser is in character field.
 
-character.addEventListener("keypress", function(event) {
+characterInput.addEventListener("keypress", function(event) {
 	console.log(event);
 	if (event.which === 13) {
 		event.preventDefault();
 		console.log("enter press");
-		growTree();
+		buildingObj();
 	}
 });
+
+heightInput.addEventListener("keypress", function(event) {
+	console.log(event);
+	if (event.which === 13) {
+		event.preventDefault();
+		console.log("enter press");
+		buildingObj();
+	}
+});
+
+
+function buildingObj() {
+	burnDownTree.height = heightInput.value;
+	burnDownTree.character = characterInput.value;
+	growTree(burnDownTree);
+}
 
 
